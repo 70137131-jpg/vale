@@ -302,128 +302,172 @@
             filter: drop-shadow(0 2px 10px rgba(255, 107, 157, 0.3));
         }
 
-        /* ===== LOVE LETTER ===== */
-        #love-letter {
+        /* ===== COMPLIMENT GENERATOR ===== */
+        #compliment-section {
             display: flex;
             flex-direction: column;
             align-items: center;
+            text-align: center;
         }
 
-        .envelope-wrapper {
-            position: relative;
-            width: 100%;
+        .compliment-card {
+            background: white;
+            border-radius: 28px;
+            padding: 50px 40px;
             max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .envelope-flap {
             width: 100%;
-            background: linear-gradient(135deg, #ffb3cc, #ff6b9d);
-            clip-path: polygon(0 0, 50% 60%, 100% 0, 100% 100%, 0 100%);
-            height: 120px;
-            border-radius: 16px 16px 0 0;
-            position: relative;
-            z-index: 2;
-            display: flex;
-            align-items: flex-start;
-            justify-content: center;
-            padding-top: 12px;
-            font-size: 2rem;
-        }
-
-        .letter-card {
-            background: var(--cream);
-            border-radius: 0 0 24px 24px;
-            padding: 50px 40px 40px;
             box-shadow: 0 20px 60px rgba(255, 107, 157, 0.2);
             border: 2px solid #ffe0ec;
             position: relative;
-            z-index: 3;
-            margin-top: -2px;
+            overflow: hidden;
+            margin-bottom: 30px;
+            min-height: 220px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
-        .letter-card::before {
+        .compliment-card::before {
             content: '';
-            position: absolute;
-            top: 16px;
-            left: 16px;
-            right: 16px;
-            bottom: 16px;
-            border: 1.5px dashed var(--light-pink);
-            border-radius: 12px;
-            pointer-events: none;
-        }
-
-        .letter-text {
-            font-size: 1.1rem;
-            line-height: 1.9;
-            color: var(--text);
-            font-weight: 600;
-            min-height: 160px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .cursor-blink {
-            display: inline-block;
-            width: 2px;
-            height: 1.1em;
-            background: var(--pink);
-            vertical-align: text-bottom;
-            animation: blink 0.7s step-end infinite;
-        }
-
-        @keyframes blink {
-
-            0%,
-            100% {
-                opacity: 1;
-            }
-
-            50% {
-                opacity: 0;
-            }
-        }
-
-        .letter-signature {
-            font-family: 'Pacifico', cursive;
-            color: var(--pink);
-            font-size: 1.6rem;
-            margin-top: 24px;
-            text-align: right;
-            opacity: 0;
-            transition: opacity 1s;
-        }
-
-        .floating-hearts-letter {
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
-            bottom: 0;
-            pointer-events: none;
-            overflow: hidden;
-            border-radius: 24px;
-            z-index: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--pink), var(--red), var(--gold), var(--pink));
+            background-size: 300% 100%;
+            animation: shimmerBar 3s linear infinite;
         }
 
-        .float-heart {
-            position: absolute;
-            font-size: 1.2rem;
-            animation: floatUpLetter 3s ease-in-out infinite;
-            opacity: 0;
-        }
-
-        @keyframes floatUpLetter {
+        @keyframes shimmerBar {
             0% {
-                transform: translateY(0);
+                background-position: 0% 0;
+            }
+
+            100% {
+                background-position: 300% 0;
+            }
+        }
+
+        .compliment-emoji {
+            font-size: 3.5rem;
+            margin-bottom: 16px;
+            animation: emojiDance 2s ease-in-out infinite;
+        }
+
+        .compliment-text {
+            font-family: 'Pacifico', cursive;
+            font-size: clamp(1.3rem, 4vw, 1.8rem);
+            line-height: 1.6;
+            color: var(--text);
+            transition: opacity 0.3s, transform 0.3s;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .compliment-text.spinning {
+            animation: slotSpin 0.6s cubic-bezier(.36, 1.56, .64, 1);
+        }
+
+        @keyframes slotSpin {
+            0% {
+                transform: translateY(40px) scale(0.8);
+                opacity: 0;
+            }
+
+            50% {
+                transform: translateY(-10px) scale(1.05);
                 opacity: 0.8;
             }
 
             100% {
-                transform: translateY(-200px);
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+        }
+
+        .generate-btn {
+            background: linear-gradient(135deg, var(--pink), var(--red));
+            color: white;
+            border: none;
+            padding: 20px 44px;
+            border-radius: 999px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 800;
+            cursor: pointer;
+            box-shadow: 0 8px 30px rgba(255, 51, 102, 0.4);
+            transition: transform 0.2s cubic-bezier(.36, 1.56, .64, 1), box-shadow 0.2s;
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 0.5px;
+        }
+
+        .generate-btn:hover {
+            transform: scale(1.08) translateY(-3px);
+            box-shadow: 0 12px 40px rgba(255, 51, 102, 0.5);
+        }
+
+        .generate-btn:active {
+            transform: scale(0.92);
+        }
+
+        .generate-btn.pop {
+            animation: btnPop 0.5s cubic-bezier(.36, 1.56, .64, 1);
+        }
+
+        @keyframes btnPop {
+            0% {
+                transform: scale(1);
+            }
+
+            30% {
+                transform: scale(0.88);
+            }
+
+            60% {
+                transform: scale(1.12);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .sparkle {
+            position: fixed;
+            pointer-events: none;
+            font-size: 1.5rem;
+            animation: sparkleFloat 1s ease-out forwards;
+            z-index: 999;
+            user-select: none;
+        }
+
+        @keyframes sparkleFloat {
+            0% {
+                transform: scale(0) rotate(0deg);
+                opacity: 1;
+            }
+
+            50% {
+                transform: scale(1.3) rotate(180deg);
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: scale(0) rotate(360deg) translateY(-60px);
                 opacity: 0;
             }
+        }
+
+        .compliment-counter {
+            margin-top: 16px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--light-pink);
         }
 
         /* ===== TIMER ===== */
@@ -654,21 +698,18 @@
                 margin-top: 40px;
             }
 
-            .envelope-flap {
-                height: 90px;
+            .compliment-card {
+                padding: 36px 24px;
+                min-height: 190px;
             }
 
-            .letter-card {
-                padding: 40px 28px 30px;
+            .compliment-emoji {
+                font-size: 2.8rem;
             }
 
-            .letter-text {
-                font-size: 1rem;
-                line-height: 1.8;
-            }
-
-            .letter-signature {
-                font-size: 1.3rem;
+            .generate-btn {
+                padding: 16px 36px;
+                font-size: 1.05rem;
             }
 
             .timer-box {
@@ -737,31 +778,24 @@
                 margin-bottom: 24px;
             }
 
-            .envelope-flap {
-                height: 70px;
-                font-size: 1.5rem;
+            .compliment-card {
+                padding: 30px 16px;
+                min-height: 170px;
+                border-radius: 20px;
             }
 
-            .letter-card {
-                padding: 32px 18px 24px;
+            .compliment-emoji {
+                font-size: 2.2rem;
+                margin-bottom: 10px;
             }
 
-            .letter-card::before {
-                top: 10px;
-                left: 10px;
-                right: 10px;
-                bottom: 10px;
+            .compliment-text {
+                min-height: 60px;
             }
 
-            .letter-text {
-                font-size: 0.92rem;
-                line-height: 1.75;
-                min-height: 120px;
-            }
-
-            .letter-signature {
-                font-size: 1.15rem;
-                margin-top: 16px;
+            .generate-btn {
+                padding: 14px 30px;
+                font-size: 0.95rem;
             }
 
             .timer-grid {
@@ -811,16 +845,13 @@
 
         /* --- Very small phones (< 360px) --- */
         @media (max-width: 360px) {
-            .envelope-flap {
-                height: 60px;
+            .compliment-card {
+                padding: 24px 12px;
+                min-height: 150px;
             }
 
-            .letter-card {
-                padding: 26px 14px 20px;
-            }
-
-            .letter-text {
-                font-size: 0.85rem;
+            .compliment-emoji {
+                font-size: 1.8rem;
             }
 
             .timer-num {
@@ -887,18 +918,18 @@
         </div>
     </section>
 
-    <!-- ===== LOVE LETTER ===== -->
-    <section id="love-letter" class="fade-in-section section-bg-cream">
-        <div class="divider">💌 💌 💌</div>
-        <h2 class="section-heading">A Little Love Note</h2>
-        <div class="envelope-wrapper">
-            <div class="envelope-flap">💌</div>
-            <div class="letter-card">
-                <div class="floating-hearts-letter" id="letter-hearts"></div>
-                <p class="letter-text" id="typewriter-text"></p>
-                <p class="letter-signature" id="letter-sig">— Yours, hopelessly & happily 💕</p>
-            </div>
+    <!-- ===== COMPLIMENT GENERATOR ===== -->
+    <section id="compliment-section" class="fade-in-section section-bg-cream">
+        <div class="divider">✨ ✨ ✨</div>
+        <h2 class="section-heading">Sweet Nothings Machine</h2>
+        <div class="compliment-card">
+            <div class="compliment-emoji" id="compliment-emoji">�</div>
+            <p class="compliment-text" id="compliment-text">Tap the button to generate a compliment just for you...</p>
         </div>
+        <button class="generate-btn" id="generate-btn" onclick="generateCompliment(event)">
+            🎰 Give Me Sweet Words! 💕
+        </button>
+        <p class="compliment-counter" id="compliment-counter"></p>
     </section>
 
     <!-- ===== TIMER ===== -->
@@ -991,49 +1022,95 @@
             setTimeout(() => btn.style.transform = '', 200);
         }
 
-        // ===== TYPEWRITER =====
-        const message = `To my favourite person in the whole entire world,\n\nI've been trying to write this for a while. I kept deleting it because nothing sounded right. But here's the truth: you make me a little bit silly. A little bit soft. A little bit of a mess — in the best possible way.\n\nYou're the person I want to send stupid memes to at 2am. The one I want next to me on the sofa with too many blankets and something playing in the background that neither of us is really watching.\n\nYou laugh at things that aren't that funny and somehow make them hilarious. You have this way of just... being there, quietly, comfortably — like the world gets a little easier when you're in it.\n\nI didn't expect you to feel like home this quickly. But here we are. 🏡\n\nSo thank you. For the warmth. For the chaos. For the laughs. For saying yes when it mattered most.\n\nI'd pick you every single time. 💕`;
+        // ===== COMPLIMENT GENERATOR =====
+        const compliments = [
+            { text: "You're the reason I believe in magic ✨", emoji: "🪄" },
+            { text: "Your smile could light up the entire universe", emoji: "🌟" },
+            { text: "I fall in love with you a little more every day", emoji: "💕" },
+            { text: "You're my favourite notification", emoji: "📱" },
+            { text: "Being with you feels like a warm hug on a cold day", emoji: "🤗" },
+            { text: "You make my heart do a little happy dance", emoji: "💃" },
+            { text: "You're the plot twist I never saw coming — the best one", emoji: "📖" },
+            { text: "My heart skips a beat every time you laugh", emoji: "💓" },
+            { text: "You're the missing piece I didn't know I needed", emoji: "🧩" },
+            { text: "I'd choose you in every universe, every timeline", emoji: "🌌" },
+            { text: "You're the butterflies that never go away", emoji: "🦋" },
+            { text: "You make forever seem too short", emoji: "⏳" },
+            { text: "You're my 11:11 wish that came true", emoji: "🌠" },
+            { text: "Everything is better when you're next to me", emoji: "💖" },
+            { text: "You're the cutest distraction I've ever had", emoji: "🥰" },
+            { text: "My heart literally does somersaults for you", emoji: "🤸" },
+            { text: "You're home — no matter where we are", emoji: "🏡" },
+            { text: "Your voice is my favourite sound in the world", emoji: "🎵" },
+            { text: "You make me want to be the best version of myself", emoji: "⭐" },
+            { text: "I love the way your eyes sparkle", emoji: "✨" },
+            { text: "You're the sweetest thing that ever happened to me", emoji: "🍯" },
+            { text: "I could listen to you talk forever", emoji: "💬" },
+            { text: "You own my whole heart — no refunds 💕", emoji: "💝" },
+            { text: "You make ordinary moments feel absolutely magical", emoji: "🪄" },
+            { text: "Being around you is my favourite kind of therapy", emoji: "☁️" },
+            { text: "You're the reason I smile at my phone like a weirdo", emoji: "😊" },
+            { text: "My world got so much brighter the day you said yes", emoji: "☀️" },
+            { text: "You make my heartbeat sound like a love song", emoji: "🎶" },
+            { text: "You're annoyingly perfect and I love it", emoji: "😤💖" },
+            { text: "I'd still pick you even on your grumpy days", emoji: "�" },
+        ];
 
-        let typeIndex = 0;
-        let typeStarted = false;
-        const textEl = document.getElementById('typewriter-text');
-        const sigEl = document.getElementById('letter-sig');
+        let lastComplimentIndex = -1;
+        let complimentCount = 0;
+        const complimentTextEl = document.getElementById('compliment-text');
+        const complimentEmojiEl = document.getElementById('compliment-emoji');
+        const generateBtn = document.getElementById('generate-btn');
+        const complimentCounterEl = document.getElementById('compliment-counter');
 
-        function startTypewriter() {
-            if (typeStarted) return;
-            typeStarted = true;
-            const cursor = document.createElement('span');
-            cursor.className = 'cursor-blink';
-            textEl.appendChild(cursor);
+        function generateCompliment(e) {
+            // Pick a random compliment (avoid repeats)
+            let idx;
+            do {
+                idx = Math.floor(Math.random() * compliments.length);
+            } while (idx === lastComplimentIndex);
+            lastComplimentIndex = idx;
+            complimentCount++;
 
-            let i = 0;
-            const interval = setInterval(() => {
-                if (i < message.length) {
-                    if (message[i] === '\n') {
-                        textEl.insertBefore(document.createElement('br'), cursor);
-                    } else {
-                        textEl.insertBefore(document.createTextNode(message[i]), cursor);
-                    }
-                    i++;
-                    // Float hearts during typing occasionally
-                    if (i % 30 === 0) spawnLetterHeart();
-                } else {
-                    clearInterval(interval);
-                    cursor.remove();
-                    sigEl.style.opacity = '1';
-                }
-            }, 35);
-        }
+            const c = compliments[idx];
 
-        function spawnLetterHeart() {
-            const h = document.createElement('div');
-            h.className = 'float-heart';
-            h.textContent = ['💕', '💖', '💗'][Math.floor(Math.random() * 3)];
-            h.style.left = Math.random() * 80 + 10 + '%';
-            h.style.bottom = '10px';
-            h.style.animationDelay = Math.random() * 0.5 + 's';
-            document.getElementById('letter-hearts').appendChild(h);
-            setTimeout(() => h.remove(), 3500);
+            // Animate the card
+            complimentTextEl.classList.remove('spinning');
+            void complimentTextEl.offsetWidth;
+            complimentTextEl.classList.add('spinning');
+            complimentEmojiEl.textContent = c.emoji;
+            complimentTextEl.textContent = c.text;
+
+            // Button pop
+            generateBtn.classList.remove('pop');
+            void generateBtn.offsetWidth;
+            generateBtn.classList.add('pop');
+
+            // Sparkle burst
+            const sparkleEmojis = ['✨', '💖', '💕', '🌟', '⭐', '💗', '🌸', '💫'];
+            for (let i = 0; i < 10; i++) {
+                const s = document.createElement('div');
+                s.className = 'sparkle';
+                s.textContent = sparkleEmojis[Math.floor(Math.random() * sparkleEmojis.length)];
+                const angle = (Math.PI * 2 / 10) * i;
+                const dist = Math.random() * 80 + 40;
+                const x = e.clientX + Math.cos(angle) * dist;
+                const y = e.clientY + Math.sin(angle) * dist;
+                s.style.left = x + 'px';
+                s.style.top = y + 'px';
+                s.style.fontSize = (Math.random() * 1 + 1) + 'rem';
+                document.body.appendChild(s);
+                setTimeout(() => s.remove(), 1200);
+            }
+
+            // Update counter
+            if (complimentCount === 1) complimentCounterEl.textContent = '1 sweet word generated 🥹';
+            else if (complimentCount < 10) complimentCounterEl.textContent = `${complimentCount} sweet words generated! 💕`;
+            else if (complimentCount < 25) complimentCounterEl.textContent = `${complimentCount} compliments! You must be addicted 🥰`;
+            else complimentCounterEl.textContent = `${complimentCount} compliments!! Can't stop, won't stop 💖💖💖`;
+
+            // Confetti on milestones
+            if (complimentCount % 5 === 0) launchConfetti(25);
         }
 
         // ===== TIMER =====
@@ -1106,18 +1183,11 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
-                    if (entry.target.id === 'love-letter') startTypewriter();
                 }
             });
         }, { threshold: 0.15 });
 
         document.querySelectorAll('.fade-in-section').forEach(el => observer.observe(el));
-
-
-
-        // Love letter section also observed
-        const letterSection = document.querySelector('#love-letter');
-        observer.observe(letterSection);
     </script>
 </body>
 
